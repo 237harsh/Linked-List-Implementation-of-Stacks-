@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct stack{
+    int data;
+    struct stack *next;
+};
+void print(struct stack *top)
+{
+    struct stack *p=top;
+    while(p!=NULL)
+    {
+        printf("%d ",p->data);
+        p=p->next;
+    }
+}
+int isempty(struct stack *top)
+{
+    if(top==NULL)return 1;
+    else
+    return 0;
+}
+int isfull(struct stack *top)
+{
+    struct stack *p=(struct stack*)malloc(sizeof(struct stack));
+    if(p==NULL)
+    return 1;
+    else
+    return 0;
+}
+struct stack*  push(struct stack *top,int x)
+{
+       if(isfull(top))
+       {
+           printf("stack overflow");
+           return top;
+            
+       }
+       else
+       {
+           struct stack *n=(struct stack*)malloc(sizeof(struct stack));
+           n->data=x;
+           n->next=top;
+           top=n;
+           return top;
+       }
+}
+struct stack* pop(struct stack *top)
+{
+    if(isempty(top))
+    {
+        printf("stack underflow");
+        return top;
+        
+    }
+    else
+    {
+       struct stack *temp=top;
+       top=top->next;
+       free(temp);
+       return top;
+    }
+    
+
+}
+int peek(struct stack *top)
+{
+    if(isempty(top)){
+    printf("stack is empty");
+    return -1;
+    }
+    else
+    return top->data;
+}
+int main()
+{
+    
+  struct stack *top=NULL;  
+   
+   top=push(top,56);
+   top=push(top,52);
+   top=push(top,57);
+   top=push(top,59);
+   print(top);
+ top=  pop(top);
+ top=  pop(top);
+ top=  pop(top);
+ top=  pop(top);
+ if(isempty(top))
+ printf("%d ",peek(top));
+ printf("\nempty");
+  
+   print(top);
+   
+   
+}
